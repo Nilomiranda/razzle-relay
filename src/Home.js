@@ -1,33 +1,24 @@
 import React from 'react';
-import logo from './react.svg';
-import './Home.css';
+import styled from 'styled-components';
 
-class Home extends React.Component {
-  render() {
-    return (
-      <div className="Home">
-        <div className="Home-header">
-          <img src={logo} className="Home-logo" alt="logo" />
-          <h2>Welcome to Razzle</h2>
-        </div>
-        <p className="Home-intro">
-          To get started, edit <code>src/App.js</code> or{' '}
-          <code>src/Home.js</code> and save to reload.
-        </p>
-        <ul className="Home-resources">
-          <li>
-            <a href="https://github.com/jaredpalmer/razzle">Docs</a>
-          </li>
-          <li>
-            <a href="https://github.com/jaredpalmer/razzle/issues">Issues</a>
-          </li>
-          <li>
-            <a href="https://palmer.chat">Community Slack</a>
-          </li>
-        </ul>
-      </div>
-    );
+// STYLES
+
+const MainContainer = styled.main`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  h1 {
+    color: #F00;
   }
+`;
+
+const Home = () => {
+  return (
+    <MainContainer>
+      <h1>Hi</h1>
+    </MainContainer>
+  )
 }
 
 export default Home;
