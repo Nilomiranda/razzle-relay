@@ -1,0 +1,9 @@
+{
+  "presets": [
+    "razzle/babel",
+    "stage-0"
+  ],
+  "plugins": [
+    "relay"
+  ]
+}
