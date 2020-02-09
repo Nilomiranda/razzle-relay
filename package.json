@@ -11,17 +11,25 @@
     "relay": "relay-compiler --src ./src --schema ./node_modules/@octokit/graphql-schema/schema.graphql"
   },
   "dependencies": {
+    "@loadable/component": "^5.12.0",
+    "@loadable/server": "^5.12.0",
     "@octokit/graphql-schema": "^6.64.0",
     "express": "^4.17.1",
     "graphql-tag": "^2.10.2",
+    "node-fetch": "^2.6.0",
+    "prettier": "^1.19.1",
     "razzle": "^3.0.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-relay": "^8.0.0",
+    "react-relay": "^0.0.0-experimental-5f1cb628",
     "react-router-dom": "^5.1.2",
+    "relay-hooks": "^3.0.0-rc.2",
     "styled-components": "^5.0.1"
   },
   "devDependencies": {
+    "@babel/preset-stage-0": "^7.8.3",
+    "@loadable/babel-plugin": "^5.12.0",
+    "@loadable/webpack-plugin": "^5.12.0",
     "babel-plugin-relay": "^8.0.0",
     "graphql": "^14.6.0",
     "relay-compiler": "^8.0.0",

@@ -3,6 +3,12 @@ import React from 'react';
 import { StaticRouter } from 'react-router-dom';
 import express from 'express';
 import { renderToString } from 'react-dom/server';
+import { ChunkExtractor } from '@loadable/server';
+import path from 'path';
+
+const statsFile = path.resolve('./build/loadable-stats.json');
+
+const extractor = new ChunkExtractor({ statsFile });
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
 
@@ -12,11 +18,18 @@ server
   .use(express.static(process.env.RAZZLE_PUBLIC_DIR))
   .get('/*', (req, res) => {
     const context = {};
-    const markup = renderToString(
+    const jsx = extractor.collectChunks(
       <StaticRouter context={context} location={req.url}>
         <App />
       </StaticRouter>
-    );
+    )
+    // const markup = renderToString(
+    //   <StaticRouter context={context} location={req.url}>
+    //     <App />
+    //   </StaticRouter>
+    // );
+
+    const markup = renderToString(jsx);
 
     if (context.url) {
       res.redirect(context.url);
