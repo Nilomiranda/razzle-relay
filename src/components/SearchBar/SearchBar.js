@@ -14,6 +14,7 @@ const MainContainer = styled.div`
     font-weight: bolder;
     font-size: 14px;
     padding: 10px 30px 10px 10px;
+    outline-color: lightpink;
   }
   
   button {
@@ -26,11 +27,20 @@ const MainContainer = styled.div`
   }
 `
 
-const SearchBar = () => {
+const SearchBar = ({ onChange, onSearchSubmit }) => {
+  const handleTextChange = event => {
+    const { data } = event;
+    onChange(data);
+  }
+
+  const handleButtonClick = () => {
+    onSearchSubmit();
+  }
+
   return (
     <MainContainer>
-      <input type="text" placeholder="Type a Github user"/>
-      <button>Search</button>
+      <input type="text" placeholder="Type a Github user" onChange={() => handleTextChange(event)}/>
+      <button onClick={() => handleButtonClick()}>Search</button>
     </MainContainer>
   )
 }
