@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState, useTransition } from 'react';
 import styled from 'styled-components';
 
 import RepositoryList from "./components/Repository/RepositoryList";
 import SearchBar from "./components/SearchBar/SearchBar";
+import {preloadQuery, usePreloadedQuery, useRelayEnvironment, useRefetchableFragment} from "react-relay/hooks";
+import {graphql} from "react-relay";
 
 // STYLES
 
@@ -13,15 +15,75 @@ const MainContainer = styled.main`
   flex-direction: column;
   
   h1 {
-    color: #F00;
+    color: #666;
+    font-weight: bold;
+    font-size: 16px;
   }
 `;
 
-const Home = () => {
+const Home = (props) => {
+  console.log('props', props);
+  const [repoOwner, setRepoOwner] = useState('');
+  const [repositories, setRepositories] = useState([]);
+  const [startTransition] = useTransition();
+
+  const [data, refetch] = useRefetchableFragment(graphql`
+    fragment Home_user on Query
+    @refetchable(queryName: "RepositoriesRefetchQuery") {
+        user (login: $owner) {
+            login
+            name
+            avatarUrl
+            repositories (first: 10) {
+                edges {
+                    node {
+                        description
+                        name
+                    }
+                }
+            }
+        }
+    }
+  `, props.data)
+
+  // const query = graphql`
+  //     query HomeQuery ($owner: String!) {
+  //       user (login: $owner) {
+  //         login
+  //         name
+  //         avatarUrl
+  //         repositories (first: 10) {
+  //           edges {
+  //               node {
+  //                   description
+  //                   name
+  //               }
+  //           }
+  //         }
+  //       }
+  //     }
+  // `;
+
+  const handleChange = text => {
+    setRepoOwner(text);
+  }
+
+  const handleSearch = () => {
+    const searchParams = repoOwner;
+    startTransition(() => {
+      refetch({ owner: searchParams }, { fetchPolicy: 'store-or-network', onComplete: () => console.log('repositories', repositories) })
+
+      setRepositories(data);
+    })
+  }
+
   return (
     <MainContainer>
-      <SearchBar />
-      <RepositoryList />
+      <SearchBar onChange={(text) => handleChange(text)} onSearchSubmit={handleSearch}/>
+      {
+        data ? <strong>Name: {data && data.user.name}</strong> : <strong></strong>
+      }
+      <RepositoryList repositories={data && data.user.repositories.edges} />
     </MainContainer>
   )
 }

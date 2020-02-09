@@ -29,8 +29,8 @@ const MainContainer = styled.div`
 
 const SearchBar = ({ onChange, onSearchSubmit }) => {
   const handleTextChange = event => {
-    const { data } = event;
-    onChange(data);
+    const { target: { value } } = event;
+    onChange(value);
   }
 
   const handleButtonClick = () => {

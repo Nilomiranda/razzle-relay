@@ -7,6 +7,14 @@ import {
 
 import fetch from "node-fetch";
 
+/**
+ * In order to work with github graphql API you need
+ * a personal access token. Follow the instructions from
+ * the link below:
+ * https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line
+ */
+const GITHUB_PERSONAL_ACCESS_TOKEN = ''
+
 function fetchQuery(
   operation,
   variables,
@@ -15,7 +23,7 @@ function fetchQuery(
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer c8e5392a8eed4d586b55f38c0466cb51953ee781'
+      'Authorization': `Bearer ${GITHUB_PERSONAL_ACCESS_TOKEN}`
     },
     body: JSON.stringify({
       query: operation.text,

@@ -3,7 +3,7 @@ import React from 'react';
 import { StaticRouter } from 'react-router-dom';
 import express from 'express';
 import { renderToString } from 'react-dom/server';
-import { ChunkExtractor } from '@loadable/server';
+import { ChunkExtractor, ChunkExtractorManager } from '@loadable/server';
 import path from 'path';
 
 const statsFile = path.resolve('./build/loadable-stats.json');
@@ -20,7 +20,9 @@ server
     const context = {};
     const jsx = extractor.collectChunks(
       <StaticRouter context={context} location={req.url}>
-        <App />
+        <ChunkExtractorManager extractor={extractor}>
+          <App />
+        </ChunkExtractorManager>
       </StaticRouter>
     )
     // const markup = renderToString(
@@ -31,6 +33,9 @@ server
 
     const markup = renderToString(jsx);
 
+    const scriptTags = extractor.getScriptTags();
+    const linkTags = extractor.getLinkTags()
+
     if (context.url) {
       res.redirect(context.url);
     } else {
@@ -40,7 +45,7 @@ server
     <head>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta charset="utf-8" />
-        <title>Welcome to Razzle</title>
+        <title>GitUser index</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         ${
           assets.client.css
