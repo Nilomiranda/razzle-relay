@@ -5,11 +5,13 @@ import './App.css';
 
 import { RelayEnvironmentProvider } from 'react-relay/hooks';
 import environment from "./config/RelayEnvironment";
+import User from "./User";
 
 const App = () => (
   <RelayEnvironmentProvider environment={environment}>
     <Switch>
       <Route exact path="/" component={Home} />
+      <Route path="/user/:userLogin" component={User}/>
     </Switch>
   </RelayEnvironmentProvider>
 );

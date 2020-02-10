@@ -1,5 +1,6 @@
 import React, { useState, useTransition } from 'react';
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
 
 import RepositoryList from "./components/Repository/RepositoryList";
 import SearchBar from "./components/SearchBar/SearchBar";
@@ -27,6 +28,7 @@ const Home = (props) => {
   const [repoOwner, setRepoOwner] = useState('');
   const [repositories, setRepositories] = useState([]);
   const [startTransition] = useTransition();
+  const history = useHistory();
 
   const [data, refetch] = useRefetchableFragment(
     graphql`  
@@ -52,11 +54,15 @@ const Home = (props) => {
     })
   }
 
+  const handleUserCardClick = userLogin => {
+    history.push(`/user/${userLogin}`);
+  }
+
   return (
     <MainContainer>
       <SearchBar onChange={(text) => handleChange(text)} onSearchSubmit={handleSearch}/>
       {
-        data ? <UserCard user={data.user} /> : ''
+        data ? <UserCard user={data.user} click={login => handleUserCardClick(login)}/> : ''
       }
     </MainContainer>
   )

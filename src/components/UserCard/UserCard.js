@@ -30,7 +30,7 @@ const MainContainer = styled.div`
   }
 `
 
-const UserCard = ({ user }) => {
+const UserCard = ({ user, click }) => {
   console.log('UserCard -> user -> ', user)
   const data = useFragment(
     graphql`
@@ -50,7 +50,7 @@ const UserCard = ({ user }) => {
     `, user
   )
   return (
-    <MainContainer>
+    <MainContainer onClick={() => click(data.login)}>
       <img src={data && data.avatarUrl}/>
       <strong>{data && data.name}</strong>
       <small>{data && data.login}</small>
