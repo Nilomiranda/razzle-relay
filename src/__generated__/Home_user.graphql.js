@@ -8,22 +8,13 @@
 
 /*::
 import type { ReaderFragment } from 'relay-runtime';
+type UserCard_user$ref = any;
 import type { FragmentReference } from "relay-runtime";
 declare export opaque type Home_user$ref: FragmentReference;
 declare export opaque type Home_user$fragmentType: Home_user$ref;
 export type Home_user = {|
   +user: ?{|
-    +login: string,
-    +name: ?string,
-    +avatarUrl: any,
-    +repositories: {|
-      +edges: ?$ReadOnlyArray<?{|
-        +node: ?{|
-          +description: ?string,
-          +name: string,
-        |}
-      |}>
-    |},
+    +$fragmentRefs: UserCard_user$ref
   |},
   +$refType: Home_user$ref,
 |};
@@ -36,22 +27,14 @@ export type Home_user$key = {
 */
 
 
-const node/*: ReaderFragment*/ = (function(){
-var v0 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "name",
-  "args": null,
-  "storageKey": null
-};
-return {
+const node/*: ReaderFragment*/ = {
   "kind": "Fragment",
   "name": "Home_user",
   "type": "Query",
   "metadata": {
     "refetch": {
       "connection": null,
-      "operation": require('./RepositoriesRefetchQuery.graphql.js'),
+      "operation": require('./UserRefetchQuery.graphql.js'),
       "fragmentPathInResult": []
     }
   },
@@ -79,72 +62,14 @@ return {
       "plural": false,
       "selections": [
         {
-          "kind": "ScalarField",
-          "alias": null,
-          "name": "login",
-          "args": null,
-          "storageKey": null
-        },
-        (v0/*: any*/),
-        {
-          "kind": "ScalarField",
-          "alias": null,
-          "name": "avatarUrl",
-          "args": null,
-          "storageKey": null
-        },
-        {
-          "kind": "LinkedField",
-          "alias": null,
-          "name": "repositories",
-          "storageKey": "repositories(first:10)",
-          "args": [
-            {
-              "kind": "Literal",
-              "name": "first",
-              "value": 10
-            }
-          ],
-          "concreteType": "RepositoryConnection",
-          "plural": false,
-          "selections": [
-            {
-              "kind": "LinkedField",
-              "alias": null,
-              "name": "edges",
-              "storageKey": null,
-              "args": null,
-              "concreteType": "RepositoryEdge",
-              "plural": true,
-              "selections": [
-                {
-                  "kind": "LinkedField",
-                  "alias": null,
-                  "name": "node",
-                  "storageKey": null,
-                  "args": null,
-                  "concreteType": "Repository",
-                  "plural": false,
-                  "selections": [
-                    {
-                      "kind": "ScalarField",
-                      "alias": null,
-                      "name": "description",
-                      "args": null,
-                      "storageKey": null
-                    },
-                    (v0/*: any*/)
-                  ]
-                }
-              ]
-            }
-          ]
+          "kind": "FragmentSpread",
+          "name": "UserCard_user",
+          "args": null
         }
       ]
     }
   ]
 };
-})();
 // prettier-ignore
-(node/*: any*/).hash = '7c7029d471fe8efdf22ffce2f010a818';
+(node/*: any*/).hash = 'ef2708d8184d70ecf8bf4fce920c2340';
 module.exports = node;

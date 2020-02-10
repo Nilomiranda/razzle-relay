@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import RepositoryList from "./components/Repository/RepositoryList";
 import SearchBar from "./components/SearchBar/SearchBar";
+import UserCard from "./components/UserCard/UserCard";
 import {preloadQuery, usePreloadedQuery, useRelayEnvironment, useRefetchableFragment} from "react-relay/hooks";
 import {graphql} from "react-relay";
 
@@ -27,42 +28,16 @@ const Home = (props) => {
   const [repositories, setRepositories] = useState([]);
   const [startTransition] = useTransition();
 
-  const [data, refetch] = useRefetchableFragment(graphql`
-    fragment Home_user on Query
-    @refetchable(queryName: "RepositoriesRefetchQuery") {
-        user (login: $owner) {
-            login
-            name
-            avatarUrl
-            repositories (first: 10) {
-                edges {
-                    node {
-                        description
-                        name
-                    }
-                }
-            }
-        }
-    }
-  `, props.data)
-
-  // const query = graphql`
-  //     query HomeQuery ($owner: String!) {
-  //       user (login: $owner) {
-  //         login
-  //         name
-  //         avatarUrl
-  //         repositories (first: 10) {
-  //           edges {
-  //               node {
-  //                   description
-  //                   name
-  //               }
-  //           }
-  //         }
-  //       }
-  //     }
-  // `;
+  const [data, refetch] = useRefetchableFragment(
+    graphql`  
+      fragment Home_user on Query
+      @refetchable(queryName: "UserRefetchQuery") {
+          user(login: $owner) {
+              ...UserCard_user
+          }
+      }
+    `, props.data
+  )
 
   const handleChange = text => {
     setRepoOwner(text);
@@ -83,7 +58,8 @@ const Home = (props) => {
       {
         data ? <strong>Name: {data && data.user.name}</strong> : <strong></strong>
       }
-      <RepositoryList repositories={data && data.user.repositories.edges} />
+      {/*<RepositoryList repositories={data && data.user.repositories.edges} />*/}
+      <UserCard user={data && data.user}/>
     </MainContainer>
   )
 }
