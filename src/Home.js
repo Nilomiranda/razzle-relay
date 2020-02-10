@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import RepositoryList from "./components/Repository/RepositoryList";
 import SearchBar from "./components/SearchBar/SearchBar";
 import UserCard from "./components/UserCard/UserCard";
-import {preloadQuery, usePreloadedQuery, useRelayEnvironment, useRefetchableFragment} from "react-relay/hooks";
+import { useRefetchableFragment } from "react-relay/hooks";
 import {graphql} from "react-relay";
 
 // STYLES
