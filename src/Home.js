@@ -56,10 +56,8 @@ const Home = (props) => {
     <MainContainer>
       <SearchBar onChange={(text) => handleChange(text)} onSearchSubmit={handleSearch}/>
       {
-        data ? <strong>Name: {data && data.user.name}</strong> : <strong></strong>
+        data ? <UserCard user={data.user} /> : ''
       }
-      {/*<RepositoryList repositories={data && data.user.repositories.edges} />*/}
-      <UserCard user={data && data.user}/>
     </MainContainer>
   )
 }
