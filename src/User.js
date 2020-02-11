@@ -13,6 +13,7 @@ const MainContainer = styled.div`
 `
 
 const User = () => {
+  console.log(`hi from user`)
   const environment = useRelayEnvironment();
 
   const query = graphql`
@@ -23,6 +24,7 @@ const User = () => {
                       node {
                           description
                           name
+                          id
                       }
                   }
               }
@@ -31,7 +33,7 @@ const User = () => {
   `
 
   const { userLogin } = useParams();
-
+  console.log(userLogin)
 
   const result = preloadQuery(
     environment,
@@ -40,6 +42,8 @@ const User = () => {
     { fetchPolicy: 'store-or-network' },
   )
   const res = usePreloadedQuery(query, result);
+
+  console.log(res);
 
   return (
     <MainContainer>

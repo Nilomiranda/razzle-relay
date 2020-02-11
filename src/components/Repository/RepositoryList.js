@@ -5,7 +5,7 @@ import RepositoryItem from './RepositoryItem';
 const RepositoryList = ({ repositories }) => {
 
   return repositories.map(repo => {
-    return <RepositoryItem repository={repo} />
+    return <RepositoryItem repository={repo} key={repo.node.id}/>
   })
 }
 

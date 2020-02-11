@@ -24,7 +24,6 @@ const MainContainer = styled.main`
 `;
 
 const Home = (props) => {
-  console.log('props', props);
   const [repoOwner, setRepoOwner] = useState('');
   const [repositories, setRepositories] = useState([]);
   const [startTransition] = useTransition();

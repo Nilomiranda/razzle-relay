@@ -11,12 +11,12 @@ import Loading from "./components/Loading/Loading";
 const App = () => (
   <RelayEnvironmentProvider environment={environment}>
     <Switch>
-      <Suspense fallback={<Loading />}>
+      {/*<Suspense fallback={<Loading />}>*/}
         <Route exact path="/" component={Home} />
-      </Suspense>
-      <Suspense fallback={<Loading loadingText="Loading user repositories..."/>}>
+      {/*</Suspense>*/}
+      {/*<Suspense fallback={<Loading loadingText="Loading user repositories..."/>}>*/}
         <Route path="/user/:userLogin" component={User}/>
-      </Suspense>
+      {/*</Suspense>*/}
     </Switch>
   </RelayEnvironmentProvider>
 );

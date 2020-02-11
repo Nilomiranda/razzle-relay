@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 3d8f57a47faf636741dc400ddb0b9ed7
+ * @relayHash d8b9532c55ec54904743fb7090157530
  */
 
 /* eslint-disable */
@@ -19,6 +19,7 @@ export type UserQueryResponse = {|
         +node: ?{|
           +description: ?string,
           +name: string,
+          +id: string,
         |}
       |}>
     |}
@@ -66,33 +67,66 @@ v1 = [
     "variableName": "login"
   }
 ],
-v2 = [
-  {
-    "kind": "Literal",
-    "name": "first",
-    "value": 10
-  }
-],
-v3 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "description",
-  "args": null,
-  "storageKey": null
-},
-v4 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "name",
-  "args": null,
-  "storageKey": null
-},
-v5 = {
+v2 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "id",
   "args": null,
   "storageKey": null
+},
+v3 = {
+  "kind": "LinkedField",
+  "alias": null,
+  "name": "repositories",
+  "storageKey": "repositories(first:10)",
+  "args": [
+    {
+      "kind": "Literal",
+      "name": "first",
+      "value": 10
+    }
+  ],
+  "concreteType": "RepositoryConnection",
+  "plural": false,
+  "selections": [
+    {
+      "kind": "LinkedField",
+      "alias": null,
+      "name": "edges",
+      "storageKey": null,
+      "args": null,
+      "concreteType": "RepositoryEdge",
+      "plural": true,
+      "selections": [
+        {
+          "kind": "LinkedField",
+          "alias": null,
+          "name": "node",
+          "storageKey": null,
+          "args": null,
+          "concreteType": "Repository",
+          "plural": false,
+          "selections": [
+            {
+              "kind": "ScalarField",
+              "alias": null,
+              "name": "description",
+              "args": null,
+              "storageKey": null
+            },
+            {
+              "kind": "ScalarField",
+              "alias": null,
+              "name": "name",
+              "args": null,
+              "storageKey": null
+            },
+            (v2/*: any*/)
+          ]
+        }
+      ]
+    }
+  ]
 };
 return {
   "kind": "Request",
@@ -112,41 +146,7 @@ return {
         "concreteType": "User",
         "plural": false,
         "selections": [
-          {
-            "kind": "LinkedField",
-            "alias": null,
-            "name": "repositories",
-            "storageKey": "repositories(first:10)",
-            "args": (v2/*: any*/),
-            "concreteType": "RepositoryConnection",
-            "plural": false,
-            "selections": [
-              {
-                "kind": "LinkedField",
-                "alias": null,
-                "name": "edges",
-                "storageKey": null,
-                "args": null,
-                "concreteType": "RepositoryEdge",
-                "plural": true,
-                "selections": [
-                  {
-                    "kind": "LinkedField",
-                    "alias": null,
-                    "name": "node",
-                    "storageKey": null,
-                    "args": null,
-                    "concreteType": "Repository",
-                    "plural": false,
-                    "selections": [
-                      (v3/*: any*/),
-                      (v4/*: any*/)
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
+          (v3/*: any*/)
         ]
       }
     ]
@@ -165,43 +165,8 @@ return {
         "concreteType": "User",
         "plural": false,
         "selections": [
-          {
-            "kind": "LinkedField",
-            "alias": null,
-            "name": "repositories",
-            "storageKey": "repositories(first:10)",
-            "args": (v2/*: any*/),
-            "concreteType": "RepositoryConnection",
-            "plural": false,
-            "selections": [
-              {
-                "kind": "LinkedField",
-                "alias": null,
-                "name": "edges",
-                "storageKey": null,
-                "args": null,
-                "concreteType": "RepositoryEdge",
-                "plural": true,
-                "selections": [
-                  {
-                    "kind": "LinkedField",
-                    "alias": null,
-                    "name": "node",
-                    "storageKey": null,
-                    "args": null,
-                    "concreteType": "Repository",
-                    "plural": false,
-                    "selections": [
-                      (v3/*: any*/),
-                      (v4/*: any*/),
-                      (v5/*: any*/)
-                    ]
-                  }
-                ]
-              }
-            ]
-          },
-          (v5/*: any*/)
+          (v3/*: any*/),
+          (v2/*: any*/)
         ]
       }
     ]
@@ -216,5 +181,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'ed274efa698058b079e0d466c9ca117a';
+(node/*: any*/).hash = '4db22baa872b67eaa82033ba0f9e88c8';
 module.exports = node;

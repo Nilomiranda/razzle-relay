@@ -1,10 +1,19 @@
 import App from './App';
 import {BrowserRouter} from 'react-router-dom';
 import React, { Suspense } from 'react';
-import { hydrate } from 'react-dom';
+import { hydrate, createBlockingRoot } from 'react-dom';
 import { loadableReady } from '@loadable/component';
 
 loadableReady(() => {
+
+  // createBlockingRoot(
+  //   document.getElementById('root')
+  //   , {  hydrate: true }
+  // ).render(
+  //   <BrowserRouter>
+  //     <App />
+  //   </BrowserRouter>
+  // )
 
   hydrate(
     <BrowserRouter>
