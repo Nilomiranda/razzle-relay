@@ -1,13 +1,9 @@
 import React, { useState, useTransition } from 'react';
 import styled from 'styled-components';
-// import { useHistory } from 'react-router-dom';
-import { match } from 'react-suspense-router';
-import RepositoryList from "./components/Repository/RepositoryList";
 import SearchBar from "./components/SearchBar/SearchBar";
 import UserCard from "./components/UserCard/UserCard";
-import { useRefetchableFragment, preloadQuery } from "react-relay/hooks";
+import { useRefetchableFragment } from "react-relay/hooks";
 import {graphql} from "react-relay";
-import environment from "./config/RelayEnvironment";
 
 // STYLES
 
@@ -61,8 +57,14 @@ const Home = (props) => {
   return (
     <MainContainer>
       <SearchBar onChange={(text) => handleChange(text)} onSearchSubmit={handleSearch}/>
+      { console.log(`data ------->`, data && data.user) }
       {
-        data ? <UserCard user={data.user} click={login => handleUserCardClick(login)}/> : ''
+        data ?
+          <>
+            <UserCard user={data.user} />
+            {/*<UserCard user={data.user} click={login => handleUserCardClick(login)}/>*/}
+          </>
+          : ''
       }
     </MainContainer>
   )

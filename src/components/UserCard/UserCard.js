@@ -1,6 +1,8 @@
 import React, { Suspense } from 'react';
 import styled from 'styled-components';
 import { graphql, useFragment } from 'react-relay/hooks';
+import { Link } from 'react-suspense-router';
+
 
 // styles
 const MainContainer = styled.div`
@@ -50,13 +52,17 @@ const UserCard = ({ user, click }) => {
     `, user
   )
   return (
-    <MainContainer onClick={() => click(data.login)}>
-      <img src={data && data.avatarUrl}/>
-      <strong>{data && data.name}</strong>
-      <small>{data && data.login}</small>
+    <Link to={`/user/${data && data.login}`}>
+      <MainContainer onClick={() => {
+        click && click(data.login)
+      }}>
+        <img src={data && data.avatarUrl}/>
+        <strong>{data && data.name}</strong>
+        <small>{data && data.login}</small>
 
-      <p>{data && data.bio}</p>
-    </MainContainer>
+        <p>{data && data.bio}</p>
+      </MainContainer>
+    </Link>
   )
 }
 
