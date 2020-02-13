@@ -1,27 +1,21 @@
 import React, { Suspense } from 'react';
-// import { Route, Switch } from 'react-router-dom';
-import Home from './Home';
-import User from "./User";
+const Home = React.lazy(() => import('./Home'));
+const User = React.lazy(() => import('./User'));
 import { RelayEnvironmentProvider } from 'react-relay/hooks';
 import environment from "./config/RelayEnvironment";
-import { graphql } from 'react-relay';
-import { Route, Routes, LazyFetcher, BrowserRouter } from 'react-suspense-router';
+import { Routes, LazyFetcher, Route } from 'react-suspense-router';
 import './App.css';
 
 const fetchUserData = LazyFetcher(() => import('./UserData'));
 
 const App = () => (
   <RelayEnvironmentProvider environment={environment}>
-    <BrowserRouter>
+    <Suspense fallback={<strong>Loading...</strong>}>
       <Routes>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route path="/user/:login" fetchData={fetchUserData}>
-          <User />
-        </Route>
+        <Route exact path="/" element={<Home />} />
+        <Route path="/user/:login" fetchData={fetchUserData} element={<User />} />
       </Routes>
-    </BrowserRouter>
+    </Suspense>
   </RelayEnvironmentProvider>
 );
 

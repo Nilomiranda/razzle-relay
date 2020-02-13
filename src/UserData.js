@@ -1,30 +1,16 @@
 import { match } from 'react-suspense-router';
 import { preloadQuery, graphql } from 'react-relay/hooks';
 import environment from "./config/RelayEnvironment";
+import UserQuery from './Queries/User';
+
 
 const fetchUserData = async (match) => {
   const user = match.params.login;
-
-  const query = graphql`
-    query UserDataQuery {
-      user (login: "Nilomiranda") {
-        repositories (first: 10) {
-          edges {
-            node {
-              description
-              name
-              id
-            }
-          }
-        }
-      }
-    }
-  `
-
+  console.log(user);
   const result = preloadQuery(
     environment,
-    query,
-    { owner: user },
+    UserQuery,
+    { login: user },
     { fetchPolicy: 'store-or-network' }
   )
 

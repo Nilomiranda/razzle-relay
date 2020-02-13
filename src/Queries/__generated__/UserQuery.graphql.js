@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash a959224704bd9cfbcac0b51eab57bdd0
+ * @relayHash d8b9532c55ec54904743fb7090157530
  */
 
 /* eslint-disable */
@@ -9,8 +9,10 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type UserDataQueryVariables = {||};
-export type UserDataQueryResponse = {|
+export type UserQueryVariables = {|
+  login: string
+|};
+export type UserQueryResponse = {|
   +user: ?{|
     +repositories: {|
       +edges: ?$ReadOnlyArray<?{|
@@ -23,16 +25,18 @@ export type UserDataQueryResponse = {|
     |}
   |}
 |};
-export type UserDataQuery = {|
-  variables: UserDataQueryVariables,
-  response: UserDataQueryResponse,
+export type UserQuery = {|
+  variables: UserQueryVariables,
+  response: UserQueryResponse,
 |};
 */
 
 
 /*
-query UserDataQuery {
-  user(login: "Nilomiranda") {
+query UserQuery(
+  $login: String!
+) {
+  user(login: $login) {
     repositories(first: 10) {
       edges {
         node {
@@ -50,19 +54,27 @@ query UserDataQuery {
 const node/*: ConcreteRequest*/ = (function(){
 var v0 = [
   {
-    "kind": "Literal",
+    "kind": "LocalArgument",
     "name": "login",
-    "value": "Nilomiranda"
+    "type": "String!",
+    "defaultValue": null
   }
 ],
-v1 = {
+v1 = [
+  {
+    "kind": "Variable",
+    "name": "login",
+    "variableName": "login"
+  }
+],
+v2 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "id",
   "args": null,
   "storageKey": null
 },
-v2 = {
+v3 = {
   "kind": "LinkedField",
   "alias": null,
   "name": "repositories",
@@ -109,7 +121,7 @@ v2 = {
               "args": null,
               "storageKey": null
             },
-            (v1/*: any*/)
+            (v2/*: any*/)
           ]
         }
       ]
@@ -120,54 +132,54 @@ return {
   "kind": "Request",
   "fragment": {
     "kind": "Fragment",
-    "name": "UserDataQuery",
+    "name": "UserQuery",
     "type": "Query",
     "metadata": null,
-    "argumentDefinitions": [],
+    "argumentDefinitions": (v0/*: any*/),
     "selections": [
       {
         "kind": "LinkedField",
         "alias": null,
         "name": "user",
-        "storageKey": "user(login:\"Nilomiranda\")",
-        "args": (v0/*: any*/),
+        "storageKey": null,
+        "args": (v1/*: any*/),
         "concreteType": "User",
         "plural": false,
         "selections": [
-          (v2/*: any*/)
+          (v3/*: any*/)
         ]
       }
     ]
   },
   "operation": {
     "kind": "Operation",
-    "name": "UserDataQuery",
-    "argumentDefinitions": [],
+    "name": "UserQuery",
+    "argumentDefinitions": (v0/*: any*/),
     "selections": [
       {
         "kind": "LinkedField",
         "alias": null,
         "name": "user",
-        "storageKey": "user(login:\"Nilomiranda\")",
-        "args": (v0/*: any*/),
+        "storageKey": null,
+        "args": (v1/*: any*/),
         "concreteType": "User",
         "plural": false,
         "selections": [
-          (v2/*: any*/),
-          (v1/*: any*/)
+          (v3/*: any*/),
+          (v2/*: any*/)
         ]
       }
     ]
   },
   "params": {
     "operationKind": "query",
-    "name": "UserDataQuery",
+    "name": "UserQuery",
     "id": null,
-    "text": "query UserDataQuery {\n  user(login: \"Nilomiranda\") {\n    repositories(first: 10) {\n      edges {\n        node {\n          description\n          name\n          id\n        }\n      }\n    }\n    id\n  }\n}\n",
+    "text": "query UserQuery(\n  $login: String!\n) {\n  user(login: $login) {\n    repositories(first: 10) {\n      edges {\n        node {\n          description\n          name\n          id\n        }\n      }\n    }\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '584217174ce7808d83113750508581bb';
+(node/*: any*/).hash = '4db22baa872b67eaa82033ba0f9e88c8';
 module.exports = node;

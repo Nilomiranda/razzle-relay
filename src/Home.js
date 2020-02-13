@@ -1,7 +1,7 @@
 import React, { useState, useTransition } from 'react';
 import styled from 'styled-components';
-import { useHistory } from 'react-router-dom';
-
+// import { useHistory } from 'react-router-dom';
+import { match } from 'react-suspense-router';
 import RepositoryList from "./components/Repository/RepositoryList";
 import SearchBar from "./components/SearchBar/SearchBar";
 import UserCard from "./components/UserCard/UserCard";
@@ -28,7 +28,7 @@ const Home = (props) => {
   const [repoOwner, setRepoOwner] = useState('');
   const [repositories, setRepositories] = useState([]);
   const [startTransition] = useTransition();
-  const history = useHistory();
+  // const history = useHistory();
 
   const [data, refetch] = useRefetchableFragment(
     graphql`  
