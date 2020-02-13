@@ -7,16 +7,49 @@ import { RelayEnvironmentProvider } from 'react-relay/hooks';
 import environment from "./config/RelayEnvironment";
 import User from "./User";
 import Loading from "./components/Loading/Loading";
+import { graphql } from 'react-relay';
+import { preloadQuery } from 'react-relay/hooks';
+
+const UserQuery = graphql`
+    query UserQuery($login: String!) {
+        user (login: $login) {
+            repositories (first: 10) {
+                edges {
+                    node {
+                        description
+                        name
+                        id
+                    }
+                }
+            }
+        }
+    }
+`
 
 const App = () => (
   <RelayEnvironmentProvider environment={environment}>
     <Switch>
-      {/*<Suspense fallback={<Loading />}>*/}
-        <Route exact path="/" component={Home} />
-      {/*</Suspense>*/}
-      {/*<Suspense fallback={<Loading loadingText="Loading user repositories..."/>}>*/}
-        <Route path="/user/:userLogin" component={User}/>
-      {/*</Suspense>*/}
+      <Route exact path="/">
+        <Home />
+      </Route>
+      <Route
+        path="/user/:userLogin"
+        children={routeProps => {
+          const { match: { params: { userLogin } } } = routeProps;
+
+          const res = preloadQuery(
+            environment,
+            UserQuery,
+            { login: userLogin },
+            { fetchPolicy: 'store-or-network' }
+          )
+
+          return (
+            <User query={ UserQuery } preloadedRes={res}/>
+          )
+        }}
+      >
+      </Route>
     </Switch>
   </RelayEnvironmentProvider>
 );

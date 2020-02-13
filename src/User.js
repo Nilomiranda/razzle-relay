@@ -3,6 +3,7 @@ import RepositoryList from "./components/Repository/RepositoryList";
 import { usePreloadedQuery, preloadQuery, useRelayEnvironment, graphql } from 'react-relay/hooks';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import environment from "./config/RelayEnvironment";
 
 // styles
 const MainContainer = styled.div`
@@ -12,38 +13,34 @@ const MainContainer = styled.div`
   justify-content: space-between;
 `
 
-const User = () => {
-  console.log(`hi from user`)
-  const environment = useRelayEnvironment();
+// const query = graphql`
+//     query UserQuery($login: String!) {
+//         user (login: $login) {
+//             repositories (first: 10) {
+//                 edges {
+//                     node {
+//                         description
+//                         name
+//                         id
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// `
+// // console.log(userLogin)
+//
+// const preLoadedQuery = preloadQuery(
+//   environment,
+//   query,
+//   { login: `userLogin` },
+//   { fetchPolicy: 'store-or-network' },
+// )
 
-  const query = graphql`
-      query UserQuery($login: String!) {
-          user (login: $login) {
-              repositories (first: 10) {
-                  edges {
-                      node {
-                          description
-                          name
-                          id
-                      }
-                  }
-              }
-          }
-      }
-  `
-
+const User = ({ query, preloadedRes }) => {
   const { userLogin } = useParams();
-  console.log(userLogin)
 
-  const result = preloadQuery(
-    environment,
-    query,
-    { login: userLogin },
-    { fetchPolicy: 'store-or-network' },
-  )
-  const res = usePreloadedQuery(query, result);
-
-  console.log(res);
+  const res = usePreloadedQuery(query, preloadedRes);
 
   return (
     <MainContainer>
