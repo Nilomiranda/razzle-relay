@@ -13,38 +13,11 @@ const MainContainer = styled.div`
   justify-content: space-between;
 `
 
-// const query = graphql`
-//     query UserQuery($login: String!) {
-//         user (login: $login) {
-//             repositories (first: 10) {
-//                 edges {
-//                     node {
-//                         description
-//                         name
-//                         id
-//                     }
-//                 }
-//             }
-//         }
-//     }
-// `
-// // console.log(userLogin)
-//
-// const preLoadedQuery = preloadQuery(
-//   environment,
-//   query,
-//   { login: `userLogin` },
-//   { fetchPolicy: 'store-or-network' },
-// )
-
-const User = ({ query, preloadedRes }) => {
-  const { userLogin } = useParams();
-
-  const res = usePreloadedQuery(query, preloadedRes);
-
+const User = (props) => {
+  console.log('User -> props -> ', props);
   return (
     <MainContainer>
-      <h1>{userLogin} repositories</h1>
+      <h1>{userLogin || 'Someone'} repositories</h1>
       <RepositoryList repositories={res && res.user.repositories.edges} />
     </MainContainer>
   )

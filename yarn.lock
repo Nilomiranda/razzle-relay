@@ -797,7 +797,7 @@
   resolved "https://registry.yarnpkg.com/@babel/preset-stage-0/-/preset-stage-0-7.8.3.tgz#b6a0eca1a3b72e07f9caf58f998e97568028f6f5"
   integrity sha512-+l6FlG1j73t4wh78W41StbcCz0/9a1/y+vxfnjtHl060kSmcgMfGzK9MEkLvrCOXfhp9RCX+d88sm6rOqxEIEQ==
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.1.5", "@babel/runtime@^7.4.0", "@babel/runtime@^7.6.3", "@babel/runtime@^7.7.2", "@babel/runtime@^7.7.7":
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.1.5", "@babel/runtime@^7.4.0", "@babel/runtime@^7.6.3", "@babel/runtime@^7.7.2", "@babel/runtime@^7.7.6", "@babel/runtime@^7.7.7":
   version "7.8.4"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.8.4.tgz#d79f5a2040f7caa24d53e563aad49cbc05581308"
   integrity sha512-neAp3zt80trRVBI1x0azq6c57aNBqYZH8KhMm3TaB7wEI5Q4A2SHfBHE8w9gOhI/lrqxtEbXZgQIrHP+wvSGwQ==
@@ -3931,6 +3931,13 @@ hex-color-regex@^1.1.0:
   resolved "https://registry.yarnpkg.com/hex-color-regex/-/hex-color-regex-1.1.0.tgz#4c06fccb4602fe2602b3c93df82d7e7dbf1a8a8e"
   integrity sha512-l9sfDFsuqtOqKDsQdqrMRk0U85RZc0RtOR9yPI7mRVOa4FsR/BVnZ0shmQRM96Ji99kYZP/7hn1cedc1+ApsTQ==
 
+history@5.0.0-beta.4:
+  version "5.0.0-beta.4"
+  resolved "https://registry.yarnpkg.com/history/-/history-5.0.0-beta.4.tgz#7fd3bb1f6c75d00d9b5112a816766bfc72d1a3cd"
+  integrity sha512-LMUnKPB5UlEzDF1BO0VxtDsrguGPO7SuQEmB/5OjL1305afR1O8FvX29rbJep4g2SLmKK3YdDA7+8ZDs8P8n8g==
+  dependencies:
+    "@babel/runtime" "^7.7.6"
+
 history@^4.9.0:
   version "4.10.1"
   resolved "https://registry.yarnpkg.com/history/-/history-4.10.1.tgz#33371a65e3a83b267434e2b3f3b1b4c58aad4cf3"
@@ -7062,7 +7069,7 @@ prompts@^0.1.9:
     kleur "^2.0.1"
     sisteransi "^0.1.1"
 
-prop-types@^15.6.2:
+prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -7331,6 +7338,14 @@ react-router-dom@^5.1.2:
     tiny-invariant "^1.0.2"
     tiny-warning "^1.0.0"
 
+react-router-dom@^6.0.0-alpha.1:
+  version "6.0.0-alpha.1"
+  resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-6.0.0-alpha.1.tgz#10798a64402d3f113ba8e5bed04bf3009b1d28df"
+  integrity sha512-k53/EN/yOIy+iSuolJc+3uGAUq06AuEhTXDCac2Hk+YBfRD4fD0cQL3Ram79J8ishRQehycjcfn3+S45iNZb9g==
+  dependencies:
+    history "5.0.0-beta.4"
+    prop-types "^15.7.2"
+
 react-router@5.1.2:
   version "5.1.2"
   resolved "https://registry.yarnpkg.com/react-router/-/react-router-5.1.2.tgz#6ea51d789cb36a6be1ba5f7c0d48dd9e817d3418"
@@ -7346,6 +7361,34 @@ react-router@5.1.2:
     react-is "^16.6.0"
     tiny-invariant "^1.0.2"
     tiny-warning "^1.0.0"
+
+"react-router@npm:@daishi/react-router@^6.0.0-alpha.1.lib.4":
+  version "6.0.0-alpha.1.lib.4"
+  resolved "https://registry.yarnpkg.com/@daishi/react-router/-/react-router-6.0.0-alpha.1.lib.4.tgz#9fe788dbb5c797871871104763c9dc16e56a298b"
+  integrity sha512-ptWnTtQPkChDs+IO6Axk63DMXBYmT2FXyG/POWXnBRKh3CtPrfEmRqKVRJwF/uw7UunfDb7QvOIvnVSSuoyydw==
+  dependencies:
+    history "5.0.0-beta.4"
+    prop-types "^15.7.2"
+
+react-suspense-fetch@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/react-suspense-fetch/-/react-suspense-fetch-0.2.0.tgz#12bd9a9c9e3b7a059fced3d499016012e7faaa10"
+  integrity sha512-Lo3LXkXg/GyPNLV1R/ngeYDfGlUn/LYAdIEi8BIKfeFbobbQ1tYvLrwkmObJ0UZcoTa/m/UeEi6flKlxtFyASw==
+
+react-suspense-router@^1.0.0-alpha.5:
+  version "1.0.0-alpha.5"
+  resolved "https://registry.yarnpkg.com/react-suspense-router/-/react-suspense-router-1.0.0-alpha.5.tgz#81bd14d6389153287411b3bcd2e3ea3f961e8e7f"
+  integrity sha512-cXd/gwIep4XUXCcBA1pGli1N69qM37qL27g1A+bHdkTF6dB/CANGVjgoe7bAAKDSev7+ULojBgprGr8AB/6pYA==
+  dependencies:
+    react-router "npm:@daishi/react-router@^6.0.0-alpha.1.lib.4"
+    react-router-dom "^6.0.0-alpha.1"
+    react-suspense-fetch "^0.2.0"
+    react-tracked "^1.0.6"
+
+react-tracked@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/react-tracked/-/react-tracked-1.0.6.tgz#24b96aac15a13298a83d2491fda50d71d2433f3c"
+  integrity sha512-JNyUqWHqvU1h4oFQH5HNzVS4cm/mxbIlj+o/A0y/KfH+rtat+qHMIT4vmCneFbPD+6kkb/rL+HY8yb8bg5e4yQ==
 
 react@^0.0.0-experimental-241c4467e:
   version "0.0.0-experimental-241c4467e"
