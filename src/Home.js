@@ -1,4 +1,4 @@
-import React, { useState, useTransition } from 'react';
+import React, { useState, Suspense } from 'react';
 import styled from 'styled-components';
 import SearchBar from "./components/SearchBar/SearchBar";
 import UserCard from "./components/UserCard/UserCard";
@@ -70,7 +70,9 @@ const Home = (props) => {
       {
         preloadedData ?
           <>
-            <UserCard data={preloadedData} query={query}/>
+            <Suspense fallback={<strong>Loading user...</strong>}>
+              <UserCard data={preloadedData} query={query}/>
+            </Suspense>
           </>
           : ''
       }
