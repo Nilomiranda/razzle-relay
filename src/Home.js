@@ -2,8 +2,9 @@ import React, { useState, useTransition } from 'react';
 import styled from 'styled-components';
 import SearchBar from "./components/SearchBar/SearchBar";
 import UserCard from "./components/UserCard/UserCard";
-import { useRefetchableFragment } from "react-relay/hooks";
+import { preloadQuery } from "react-relay/hooks";
 import {graphql} from "react-relay";
+import environment from "./config/RelayEnvironment";
 
 // STYLES
 
@@ -22,20 +23,25 @@ const MainContainer = styled.main`
 
 const Home = (props) => {
   const [repoOwner, setRepoOwner] = useState('');
-  const [repositories, setRepositories] = useState([]);
-  const [startTransition] = useTransition();
-  // const history = useHistory();
+  const [preloadedData, setPreloadedData] = useState(null);
 
-  const [data, refetch] = useRefetchableFragment(
-    graphql`  
-      fragment Home_user on Query
-      @refetchable(queryName: "UserRefetchQuery") {
-          user(login: $owner) {
-              ...UserCard_user
+  const query = graphql`
+      query HomeQuery ($owner: String!) {
+          user (login: $owner) {
+              login
+              name
+              avatarUrl
+              bio
+              email
+              following {
+                  totalCount
+              }
+              followers {
+                  totalCount
+              }
           }
       }
-    `, props.data
-  )
+  `;
 
   const handleChange = text => {
     setRepoOwner(text);
@@ -43,11 +49,15 @@ const Home = (props) => {
 
   const handleSearch = () => {
     const searchParams = repoOwner;
-    startTransition(() => {
-      refetch({ owner: searchParams }, { fetchPolicy: 'store-or-network', onComplete: () => console.log('repositories', repositories) })
 
-      setRepositories(data);
-    })
+    const data = preloadQuery(
+      environment,
+      query,
+      { owner: searchParams },
+      { fetchPolicy: 'store-or-network' }
+    )
+
+    setPreloadedData(data);
   }
 
   const handleUserCardClick = userLogin => {
@@ -57,12 +67,10 @@ const Home = (props) => {
   return (
     <MainContainer>
       <SearchBar onChange={(text) => handleChange(text)} onSearchSubmit={handleSearch}/>
-      { console.log(`data ------->`, data && data.user) }
       {
-        data ?
+        preloadedData ?
           <>
-            <UserCard user={data.user} />
-            {/*<UserCard user={data.user} click={login => handleUserCardClick(login)}/>*/}
+            <UserCard data={preloadedData} query={query}/>
           </>
           : ''
       }

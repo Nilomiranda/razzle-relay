@@ -1,6 +1,6 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { graphql, useFragment } from 'react-relay/hooks';
+import { usePreloadedQuery } from 'react-relay/hooks';
 import { Link } from 'react-suspense-router';
 
 
@@ -32,37 +32,32 @@ const MainContainer = styled.div`
   }
 `
 
-const UserCard = ({ user, click }) => {
-  console.log('UserCard -> user -> ', user)
-  const data = useFragment(
-    graphql`
-        fragment UserCard_user on User {
-          login
-          name
-          avatarUrl
-          bio
-          email
-          following {
-            totalCount
-          }
-          followers {
-            totalCount
-          }
-        }
-    `, user
-  )
-  return (
-    <Link to={`/user/${data && data.login}`}>
-      <MainContainer onClick={() => {
-        click && click(data.login)
-      }}>
-        <img src={data && data.avatarUrl}/>
-        <strong>{data && data.name}</strong>
-        <small>{data && data.login}</small>
+const CardLink = styled(Link)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: unset;
+`;
 
-        <p>{data && data.bio}</p>
+const UserCard = ({ data, click, query }) => {
+  const { user } = usePreloadedQuery(
+    query,
+    data
+  );
+
+  return (
+    <CardLink to={`/user/${user && user.login}`}>
+      <MainContainer onClick={() => {
+        click && click(user.login)
+      }}>
+        <img src={user && user.avatarUrl}/>
+        <strong>{user && user.name}</strong>
+        <small>{user && user.login}</small>
+
+        <p>{user && user.bio}</p>
       </MainContainer>
-    </Link>
+    </CardLink>
   )
 }
 
