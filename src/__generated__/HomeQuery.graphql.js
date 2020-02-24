@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 29911e164b0d383d0e05b28d179db7a2
+ * @relayHash d0869f0bf6a0685e992ba6df32e50811
  */
 
 /* eslint-disable */
@@ -9,22 +9,13 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
+type UserCardComponent_user$ref = any;
 export type HomeQueryVariables = {|
   owner: string
 |};
 export type HomeQueryResponse = {|
   +user: ?{|
-    +login: string,
-    +name: ?string,
-    +avatarUrl: any,
-    +bio: ?string,
-    +email: string,
-    +following: {|
-      +totalCount: number
-    |},
-    +followers: {|
-      +totalCount: number
-    |},
+    +$fragmentRefs: UserCardComponent_user$ref
   |}
 |};
 export type HomeQuery = {|
@@ -39,18 +30,22 @@ query HomeQuery(
   $owner: String!
 ) {
   user(login: $owner) {
-    login
-    name
-    avatarUrl
-    bio
-    email
-    following {
-      totalCount
-    }
-    followers {
-      totalCount
-    }
+    ...UserCardComponent_user
     id
+  }
+}
+
+fragment UserCardComponent_user on User {
+  login
+  name
+  avatarUrl
+  bio
+  email
+  following {
+    totalCount
+  }
+  followers {
+    totalCount
   }
 }
 */
@@ -71,42 +66,7 @@ v1 = [
     "variableName": "owner"
   }
 ],
-v2 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "login",
-  "args": null,
-  "storageKey": null
-},
-v3 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "name",
-  "args": null,
-  "storageKey": null
-},
-v4 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "avatarUrl",
-  "args": null,
-  "storageKey": null
-},
-v5 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "bio",
-  "args": null,
-  "storageKey": null
-},
-v6 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "email",
-  "args": null,
-  "storageKey": null
-},
-v7 = [
+v2 = [
   {
     "kind": "ScalarField",
     "alias": null,
@@ -114,27 +74,7 @@ v7 = [
     "args": null,
     "storageKey": null
   }
-],
-v8 = {
-  "kind": "LinkedField",
-  "alias": null,
-  "name": "following",
-  "storageKey": null,
-  "args": null,
-  "concreteType": "FollowingConnection",
-  "plural": false,
-  "selections": (v7/*: any*/)
-},
-v9 = {
-  "kind": "LinkedField",
-  "alias": null,
-  "name": "followers",
-  "storageKey": null,
-  "args": null,
-  "concreteType": "FollowerConnection",
-  "plural": false,
-  "selections": (v7/*: any*/)
-};
+];
 return {
   "kind": "Request",
   "fragment": {
@@ -153,13 +93,11 @@ return {
         "concreteType": "User",
         "plural": false,
         "selections": [
-          (v2/*: any*/),
-          (v3/*: any*/),
-          (v4/*: any*/),
-          (v5/*: any*/),
-          (v6/*: any*/),
-          (v8/*: any*/),
-          (v9/*: any*/)
+          {
+            "kind": "FragmentSpread",
+            "name": "UserCardComponent_user",
+            "args": null
+          }
         ]
       }
     ]
@@ -178,13 +116,61 @@ return {
         "concreteType": "User",
         "plural": false,
         "selections": [
-          (v2/*: any*/),
-          (v3/*: any*/),
-          (v4/*: any*/),
-          (v5/*: any*/),
-          (v6/*: any*/),
-          (v8/*: any*/),
-          (v9/*: any*/),
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "login",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "name",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "avatarUrl",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "bio",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "email",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "LinkedField",
+            "alias": null,
+            "name": "following",
+            "storageKey": null,
+            "args": null,
+            "concreteType": "FollowingConnection",
+            "plural": false,
+            "selections": (v2/*: any*/)
+          },
+          {
+            "kind": "LinkedField",
+            "alias": null,
+            "name": "followers",
+            "storageKey": null,
+            "args": null,
+            "concreteType": "FollowerConnection",
+            "plural": false,
+            "selections": (v2/*: any*/)
+          },
           {
             "kind": "ScalarField",
             "alias": null,
@@ -200,11 +186,11 @@ return {
     "operationKind": "query",
     "name": "HomeQuery",
     "id": null,
-    "text": "query HomeQuery(\n  $owner: String!\n) {\n  user(login: $owner) {\n    login\n    name\n    avatarUrl\n    bio\n    email\n    following {\n      totalCount\n    }\n    followers {\n      totalCount\n    }\n    id\n  }\n}\n",
+    "text": "query HomeQuery(\n  $owner: String!\n) {\n  user(login: $owner) {\n    ...UserCardComponent_user\n    id\n  }\n}\n\nfragment UserCardComponent_user on User {\n  login\n  name\n  avatarUrl\n  bio\n  email\n  following {\n    totalCount\n  }\n  followers {\n    totalCount\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '457a76f8fa39c2022bf96745d2c55a50';
+(node/*: any*/).hash = 'c860cfc7d68aab2e910e76d4eb8a1a99';
 module.exports = node;

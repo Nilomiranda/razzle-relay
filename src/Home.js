@@ -2,7 +2,7 @@ import React, { useState, Suspense } from 'react';
 import styled from 'styled-components';
 import SearchBar from "./components/SearchBar/SearchBar";
 import UserCard from "./components/UserCard/UserCard";
-import { preloadQuery } from "react-relay/hooks";
+import { preloadQuery, usePreloadedQuery } from "react-relay/hooks";
 import {graphql} from "react-relay";
 import environment from "./config/RelayEnvironment";
 
@@ -28,17 +28,7 @@ const Home = (props) => {
   const query = graphql`
       query HomeQuery ($owner: String!) {
           user (login: $owner) {
-              login
-              name
-              avatarUrl
-              bio
-              email
-              following {
-                  totalCount
-              }
-              followers {
-                  totalCount
-              }
+              ...UserCardComponent_user
           }
       }
   `;
@@ -57,11 +47,9 @@ const Home = (props) => {
       { fetchPolicy: 'store-or-network' }
     )
 
-    setPreloadedData(data);
-  }
+    console.log('data -> ', data)
 
-  const handleUserCardClick = userLogin => {
-    history.push(`/user/${userLogin}`);
+    setPreloadedData(data);
   }
 
   return (
@@ -70,6 +58,7 @@ const Home = (props) => {
       {
         preloadedData ?
           <>
+            { console.log('preloadedData -> ', preloadedData) }
             <Suspense fallback={<strong>Loading user...</strong>}>
               <UserCard data={preloadedData} query={query}/>
             </Suspense>

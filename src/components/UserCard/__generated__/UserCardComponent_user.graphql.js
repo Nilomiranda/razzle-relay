@@ -9,9 +9,9 @@
 /*::
 import type { ReaderFragment } from 'relay-runtime';
 import type { FragmentReference } from "relay-runtime";
-declare export opaque type UserCard_user$ref: FragmentReference;
-declare export opaque type UserCard_user$fragmentType: UserCard_user$ref;
-export type UserCard_user = {|
+declare export opaque type UserCardComponent_user$ref: FragmentReference;
+declare export opaque type UserCardComponent_user$fragmentType: UserCardComponent_user$ref;
+export type UserCardComponent_user = {|
   +login: string,
   +name: ?string,
   +avatarUrl: any,
@@ -23,12 +23,12 @@ export type UserCard_user = {|
   +followers: {|
     +totalCount: number
   |},
-  +$refType: UserCard_user$ref,
+  +$refType: UserCardComponent_user$ref,
 |};
-export type UserCard_user$data = UserCard_user;
-export type UserCard_user$key = {
-  +$data?: UserCard_user$data,
-  +$fragmentRefs: UserCard_user$ref,
+export type UserCardComponent_user$data = UserCardComponent_user;
+export type UserCardComponent_user$key = {
+  +$data?: UserCardComponent_user$data,
+  +$fragmentRefs: UserCardComponent_user$ref,
   ...
 };
 */
@@ -46,7 +46,7 @@ var v0 = [
 ];
 return {
   "kind": "Fragment",
-  "name": "UserCard_user",
+  "name": "UserCardComponent_user",
   "type": "User",
   "metadata": null,
   "argumentDefinitions": [],
@@ -110,5 +110,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '49cd99a1ce04f14230c8cf6a6fa41b8b';
+(node/*: any*/).hash = '9c5de53b491404247fbdea867b63b9ac';
 module.exports = node;
