@@ -32,10 +32,12 @@ server
     //   </StaticRouter>
     // );
 
-    const markup = renderToString(jsx);
-
     const scriptTags = extractor.getScriptTags();
-    const linkTags = extractor.getLinkTags()
+    const linkTags = extractor.getLinkTags();
+
+    console.log('scriptTags -> ', scriptTags);
+    console.log('linkTags -> ', linkTags);
+    const markup = renderToString(jsx);
 
     if (context.url) {
       res.redirect(context.url);
@@ -50,13 +52,22 @@ server
         <meta name="viewport" content="width=device-width, initial-scale=1">
         ${
           assets.client.css
-            ? `<link rel="stylesheet" href="${assets.client.css}">`
+            ? `
+                <link rel="stylesheet" href="${assets.client.css}">
+                ${linkTags}
+               `
             : ''
         }
         ${
           process.env.NODE_ENV === 'production'
-            ? `<script src="${assets.client.js}" defer></script>`
-            : `<script src="${assets.client.js}" defer crossorigin></script>`
+            ? `
+                <script src="${assets.client.js}" defer></script>
+                ${scriptTags}
+              `
+            : `
+                <script src="${assets.client.js}" defer crossorigin></script>
+                ${scriptTags}
+              `
         }
     </head>
     <body>

@@ -4,7 +4,7 @@ module.exports = {
   modify: (config, { target, dev }, webpack) => {
     config.plugins.push(new LoadablePlugin({ writeToDisk: true }));
 
-    console.log(config)
+    console.log('config -> ', config)
 
     if (target === 'node' && !dev) {
       //target for backend

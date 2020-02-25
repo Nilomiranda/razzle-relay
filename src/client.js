@@ -18,9 +18,7 @@ loadableReady(() => {
 
   hydrate(
     <BrowserRouter>
-      <Suspense fallback={<h1>Loading...</h1>}>
-        <App />
-      </Suspense>
+      <App />
     </BrowserRouter>,
     document.getElementById('root')
   );
