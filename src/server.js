@@ -34,9 +34,7 @@ server
 
     const scriptTags = extractor.getScriptTags();
     const linkTags = extractor.getLinkTags();
-
-    console.log('scriptTags -> ', scriptTags);
-    console.log('linkTags -> ', linkTags);
+    const styleTags = extractor.getStyleTags();
     const markup = renderToString(jsx);
 
     if (context.url) {
@@ -55,6 +53,7 @@ server
             ? `
                 <link rel="stylesheet" href="${assets.client.css}">
                 ${linkTags}
+                ${styleTags};
                `
             : ''
         }

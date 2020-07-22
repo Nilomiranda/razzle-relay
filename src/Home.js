@@ -55,16 +55,11 @@ const Home = (props) => {
   return (
     <MainContainer>
       <SearchBar onChange={(text) => handleChange(text)} onSearchSubmit={handleSearch}/>
-      {
-        preloadedData ?
-          <>
-            { console.log('preloadedData -> ', preloadedData) }
-            <Suspense fallback={<strong>Loading user...</strong>}>
-              <UserCard data={preloadedData} query={query}/>
-            </Suspense>
-          </>
-          : ''
-      }
+        <Suspense fallback={<strong>Loading user...</strong>}>
+          {
+            preloadedData ? <UserCard data={preloadedData} query={query}/> : ''
+          }
+        </Suspense>
     </MainContainer>
   )
 }

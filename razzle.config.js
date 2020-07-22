@@ -4,7 +4,10 @@ module.exports = {
   modify: (config, { target, dev }, webpack) => {
     config.plugins.push(new LoadablePlugin({ writeToDisk: true }));
 
-    console.log('config -> ', config)
+    if (target === `web` && dev) {
+      config.devServer.port = 3000;
+      console.log('devServer -> ', config.devServer);
+    }
 
     if (target === 'node' && !dev) {
       //target for backend

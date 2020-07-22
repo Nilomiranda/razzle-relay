@@ -906,10 +906,10 @@
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.3.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
   integrity sha512-shAmDyaQC4H92APFoIaVDHCx5bStIocgvbwQyxPRrbUY20V1EYTbSDchWbuwlMG3V17cprZhA6+78JfB+3DTPw==
 
-"@octokit/graphql-schema@^6.64.0":
-  version "6.64.0"
-  resolved "https://registry.yarnpkg.com/@octokit/graphql-schema/-/graphql-schema-6.64.0.tgz#2bb64d4fb0a506f262ac30b5e8bb431cbfb26540"
-  integrity sha512-f8M+RY5rW7uW77pkyScnTCqS2Mux2FeXZQQkeuycJDcUAjXoG2t6DxPuwzmFR3NgG8iJPrh9CT6zma0D8mN/Dg==
+"@octokit/graphql-schema@^6.67.0":
+  version "6.67.0"
+  resolved "https://registry.yarnpkg.com/@octokit/graphql-schema/-/graphql-schema-6.67.0.tgz#3f320775944f8e604e857865008fc69a52ebd79f"
+  integrity sha512-TfoPVa+xNA/ulK+GSD94V7ILSXNVWA4xfMYUrhusPcNTWEm2fjY0+HgEcWeVBVw7FcCIW1u/iYVK97SXVcna0A==
 
 "@restart/hooks@^0.3.1":
   version "0.3.20"
