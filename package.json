@@ -16,7 +16,7 @@
     "@octokit/graphql-schema": "^6.64.0",
     "express": "^4.17.1",
     "graphql-tag": "^2.10.2",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.7",
     "prettier": "^1.19.1",
     "razzle": "^3.0.0",
     "react": "^0.0.0-experimental-241c4467e",
